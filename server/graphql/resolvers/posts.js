@@ -1,4 +1,4 @@
-const Post = require('../../models/Post')
+const Post = require("../../models/Post");
 
 module.exports = {
     Query: {
@@ -8,6 +8,20 @@ module.exports = {
                 return posts;
             } catch (error) {
                 throw new Error(error);
+            }
+        },
+
+        getPost: async (_, { postId }) => {
+            try {
+                const post = await Post.findById(postId);
+
+                if (post) {
+                    return post;
+                } else {
+                    throw new Error("Post not found");
+                }
+            } catch (err) {
+                throw new Error(err);
             }
         },
     },
